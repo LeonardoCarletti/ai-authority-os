@@ -1,1 +1,976 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AI Authority OS</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',sans-serif;background:#0a0e1a;color:#e2e8f0;min-height:100vh}.header{background:linear-gradient(135deg,#0d1b3e,#1a2a5e);padding:16px 24px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #1e3a5f}.header-icon{font-size:28px}.header-title{font-size:20px;font-weight:700;color:#00d4ff}.header-sub{font-size:12px;color:#7aa3c8;margin-top:2px}.nav{background:#0d1b3e;display:flex;gap:4px;padding:8px 24px;border-bottom:1px solid #1e3a5f;flex-wrap:wrap}.nav-btn{background:transparent;border:none;color:#7aa3c8;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;transition:all 0.2s}.nav-btn:hover{background:#1e3a5f;color:#00d4ff}.nav-btn.active{background:linear-gradient(135deg,#00d4ff22,#0080ff22);color:#00d4ff;border:1px solid #00d4ff44}.content{padding:24px;max-width:1400px;margin:0 auto}.tab-content{display:none}.tab-content.active{display:block}.card{background:#0d1b3e;border:1px solid #1e3a5f;border-radius:12px;padding:20px;margin-bottom:16px}.card-title{font-size:16px;font-weight:700;color:#00d4ff;margin-bottom:16px;display:flex;align-items:center;gap:8px}.grid{display:grid;gap:16px}.grid-2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}.grid-3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}.metric-card{background:#0d1b3e;border:1px solid #1e3a5f;border-radius:12px;padding:16px;text-align:center}.metric-value{font-size:32px;font-weight:700;color:#00d4ff}.metric-label{font-size:12px;color:#7aa3c8;margin-top:4px}.progress-bar{background:#1e3a5f;border-radius:8px;height:8px;overflow:hidden;margin-top:8px}.progress-fill{height:100%;border-radius:8px;background:linear-gradient(90deg,#00d4ff,#0080ff);transition:width 0.5s}.item-row{display:flex;align-items:center;gap:12px;padding:12px;border-radius:8px;border:1px solid #1e3a5f;margin-bottom:8px;background:#0a0e1a;cursor:pointer;transition:all 0.2s}.item-row:hover{border-color:#00d4ff44;background:#0d1b3e}.item-check{width:20px;height:20px;border-radius:50%;border:2px solid #00d4ff;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;transition:all 0.2s}.item-check.done{background:#00d4ff;border-color:#00d4ff}.item-check.done::after{content:'✓';font-size:11px;color:#000;font-weight:700}.item-text{flex:1;font-size:14px}.item-text.done{text-decoration:line-through;color:#4a6a8a}.item-badge{font-size:10px;padding:3px 8px;border-radius:12px;background:#1e3a5f;color:#7aa3c8}.item-badge.green{background:#00ff8822;color:#00ff88}.item-badge.blue{background:#00d4ff22;color:#00d4ff}.item-badge.orange{background:#ff880022;color:#ff8800}.item-badge.purple{background:#8800ff22;color:#aa44ff}.link-card{display:flex;flex-direction:column;gap:8px;padding:16px;border-radius:10px;border:1px solid #1e3a5f;background:#0a0e1a;transition:all 0.2s}.link-card:hover{border-color:#00d4ff66;transform:translateY(-2px)}.link-card a{color:#00d4ff;text-decoration:none;font-weight:600;font-size:14px}.link-card a:hover{text-decoration:underline}.link-card .desc{font-size:12px;color:#7aa3c8}.link-card .meta{display:flex;gap:8px;flex-wrap:wrap}.badge{font-size:10px;padding:2px 8px;border-radius:10px;background:#1e3a5f;color:#7aa3c8}.badge.free{background:#00ff8822;color:#00ff88}.badge.paid{background:#ff880022;color:#ff8800}.badge.top{background:#ff440022;color:#ff6666}.section-title{font-size:18px;font-weight:700;color:#e2e8f0;margin:24px 0 12px;display:flex;align-items:center;gap:8px}.week-card{background:#0a0e1a;border:1px solid #1e3a5f;border-radius:10px;padding:16px;margin-bottom:12px}.week-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;cursor:pointer}.week-title{font-size:15px;font-weight:600;color:#00d4ff}.week-prog{font-size:12px;color:#7aa3c8}.journal-entry{background:#0a0e1a;border:1px solid #1e3a5f;border-radius:10px;padding:16px;margin-bottom:12px}.journal-date{font-size:11px;color:#7aa3c8;margin-bottom:8px}.journal-text{font-size:14px;line-height:1.6}.settings-section{margin-bottom:24px}.settings-label{font-size:13px;color:#7aa3c8;margin-bottom:8px}.settings-input{width:100%;background:#0a0e1a;border:1px solid #1e3a5f;border-radius:8px;padding:10px 14px;color:#e2e8f0;font-size:14px}.settings-input:focus{outline:none;border-color:#00d4ff}.btn{padding:10px 20px;border-radius:8px;border:none;cursor:pointer;font-size:14px;font-weight:600;transition:all 0.2s}.btn-primary{background:linear-gradient(135deg,#00d4ff,#0080ff);color:#000}.btn-primary:hover{opacity:0.9;transform:translateY(-1px)}.btn-secondary{background:#1e3a5f;color:#00d4ff}.btn-secondary:hover{background:#2a4a7f}.btn-danger{background:#ff444422;color:#ff6666;border:1px solid #ff444444}.btn-danger:hover{background:#ff444444}.modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:#00000088;z-index:1000;align-items:center;justify-content:center}.modal.open{display:flex}.modal-box{background:#0d1b3e;border:1px solid #1e3a5f;border-radius:16px;padding:24px;width:90%;max-width:500px;max-height:80vh;overflow-y:auto}.modal-title{font-size:18px;font-weight:700;color:#00d4ff;margin-bottom:16px}.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}textarea{width:100%;background:#0a0e1a;border:1px solid #1e3a5f;border-radius:8px;padding:10px;color:#e2e8f0;font-size:13px;resize:vertical;min-height:80px}.textarea:focus{outline:none;border-color:#00d4ff}select{background:#0a0e1a;border:1px solid #1e3a5f;border-radius:8px;padding:8px 12px;color:#e2e8f0;font-size:13px}.add-btn{background:#00d4ff11;border:1px dashed #00d4ff44;border-radius:8px;padding:12px;width:100%;color:#00d4ff;cursor:pointer;font-size:13px;transition:all 0.2s;margin-top:8px}.add-btn:hover{background:#00d4ff22;border-color:#00d4ff}.chart-bar{display:flex;align-items:flex-end;gap:6px;height:80px;padding:8px 0}.bar{flex:1;background:linear-gradient(180deg,#00d4ff,#0080ff);border-radius:4px 4px 0 0;min-width:20px;transition:height 0.5s}.bar-label{font-size:9px;color:#7aa3c8;text-align:center;margin-top:4px}.stars{color:#ffd700;font-size:14px}.tag{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;margin:2px;background:#1e3a5f;color:#7aa3c8}@media(max-width:768px){.nav{padding:6px 12px}.content{padding:12px}.grid-2{grid-template-columns:1fr}.grid-3{grid-template-columns:1fr}}</style></head><body><div class="header"><div class="header-icon">🤖</div><div><div class="header-title">AI Authority OS</div><div class="header-sub">Sistema de Gestão - Dados | Health/Fitness | Automação</div></div></div><nav class="nav"><button class="nav-btn active" onclick="showTab('dashboard')">📊 Dashboard</button><button class="nav-btn" onclick="showTab('roadmap')">🗺️ Roadmap</button><button class="nav-btn" onclick="showTab('semana1')">📅 Semana 1</button><button class="nav-btn" onclick="showTab('progresso')">📈 Progresso</button><button class="nav-btn" onclick="showTab('cursos')">🎓 Cursos</button><button class="nav-btn" onclick="showTab('ecossistema')">🌐 Ecossistema</button><button class="nav-btn" onclick="showTab('conteudo')">✍️ Conteúdo</button><button class="nav-btn" onclick="showTab('journal')">📔 Journal</button><button class="nav-btn" onclick="showTab('config')">⚙️ Config</button></nav><div class="content"><div id="tab-dashboard" class="tab-content active"><div class="grid grid-3" style="margin-bottom:16px"><div class="metric-card"><div class="metric-value" id="m-dias">0</div><div class="metric-label">Dias de Estudo</div><div class="progress-bar"><div class="progress-fill" id="p-dias" style="width:0%"></div></div></div><div class="metric-card"><div class="metric-value" id="m-cursos">0%</div><div class="metric-label">Cursos Concluídos</div><div class="progress-bar"><div class="progress-fill" id="p-cursos" style="width:0%"></div></div></div><div class="metric-card"><div class="metric-value" id="m-tasks">0%</div><div class="metric-label">Tasks da Semana</div><div class="progress-bar"><div class="progress-fill" id="p-tasks" style="width:0%"></div></div></div><div class="metric-card"><div class="metric-value" id="m-posts">0</div><div class="metric-label">Posts Publicados</div><div class="progress-bar"><div class="progress-fill" id="p-posts" style="width:0%"></div></div></div><div class="metric-card"><div class="metric-value" id="m-streak">0</div><div class="metric-label">Streak Atual 🔥</div><div class="progress-bar"><div class="progress-fill" id="p-streak" style="width:0%"></div></div></div><div class="metric-card"><div class="metric-value" id="m-nivel">🤔</div><div class="metric-label">Nível Atual</div><div style="font-size:10px;color:#7aa3c8;margin-top:6px" id="nivel-label">Iniciante</div></div></div><div class="grid grid-2"><div class="card"><div class="card-title">🎯 Foco Desta Semana</div><div id="focos-list"></div><button class="add-btn" onclick="addFoco()">+ Adicionar Foco</button></div><div class="card"><div class="card-title">⚡ Ações Rápidas</div><div style="display:flex;flex-direction:column;gap:8px"><button class="btn btn-primary" onclick="showTab('semana1')">Ver Semana Atual</button><button class="btn btn-secondary" onclick="showTab('journal')">Escrever no Journal</button><button class="btn btn-secondary" onclick="showTab('progresso')">Atualizar Progresso</button><button class="btn btn-secondary" onclick="showTab('conteudo')">Plano de Conteúdo</button></div></div><div class="card"><div class="card-title">📊 Atividade Semanal</div><div class="chart-bar" id="weekly-chart"></div><div style="display:flex;gap:6px;margin-top:4px" id="weekly-labels"></div></div><div class="card"><div class="card-title">📝 Últimas Anotações</div><div id="recent-journal"><div style="color:#7aa3c8;font-size:13px">Nenhuma anotação ainda. Acesse o Journal para começar!</div></div></div></div></div><div id="tab-roadmap" class="tab-content"><div class="card"><div class="card-title">🗺️ Roadmap de 12 Meses - AI Authority</div><div style="font-size:13px;color:#7aa3c8;margin-bottom:16px">Clique em qualquer fase para expandir detalhes e marcar progresso</div></div><div class="week-card"><div class="week-header" onclick="toggleSection('rm1')"><div class="week-title">🟡 Fase 1: Fundamentos Sólidos (Mês 1-2)</div><div class="week-prog" id="rm1-prog">0/8 completo</div></div><div id="rm1"><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Machine Learning Specialization (Coursera - Andrew Ng)</div><span class="item-badge blue">Curso</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">AI for Everyone - DeepLearning.AI</div><span class="item-badge green">Grátis</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Generative AI for Everyone - DeepLearning.AI</div><span class="item-badge green">Grátis</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Configurar ecossistema de informação (podcasts, newsletters)</div><span class="item-badge orange">Habit</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Criar perfil LinkedIn focado em AI</div><span class="item-badge purple">Brand</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Publicar 8 posts sobre aprendizados AI</div><span class="item-badge purple">Brand</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Python básico para ML (Google Crash Course)</div><span class="item-badge blue">Técnico</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Seguir 20 referências internacionais em AI</div><span class="item-badge orange">Network</span></div></div></div><div class="week-card"><div class="week-header" onclick="toggleSection('rm2')"><div class="week-title">🟠 Fase 2: Aprofundamento Técnico (Mês 3-4)</div><div class="week-prog" id="rm2-prog">0/8 completo</div></div><div id="rm2" style="display:none"><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">AI Agents in LangGraph - DeepLearning.AI</div><span class="item-badge blue">Curso</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Practical Deep Learning - fast.ai</div><span class="item-badge green">Grátis</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Construir 2 projetos AI reais (portfólio)</div><span class="item-badge blue">Projeto</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">AI Agents Course - Hugging Face</div><span class="item-badge green">Grátis</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Participar de 1 hackathon ou competição AI</div><span class="item-badge orange">Network</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Escrever artigo técnico no Medium/Substack</div><span class="item-badge purple">Brand</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Case study: AI aplicada ao seu negócio atual</div><span class="item-badge blue">Projeto</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Networking: conectar com 5 profissionais internacionais</div><span class="item-badge orange">Network</span></div></div></div><div class="week-card"><div class="week-header" onclick="toggleSection('rm3')"><div class="week-title">🟢 Fase 3: Especialização + Negócios (Mês 5-8)</div><div class="week-prog" id="rm3-prog">0/8 completo</div></div><div id="rm3" style="display:none"><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Stanford CS229 Machine Learning (audit)</div><span class="item-badge green">Grátis</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">AI Product Management - Coursera/Udemy</div><span class="item-badge blue">Curso</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Lançar produto/serviço AI-powered</div><span class="item-badge orange">Empreend.</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Apresentar case em evento ou meetup</div><span class="item-badge purple">Brand</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Newsletter semanal sobre AI (500+ subs)</div><span class="item-badge purple">Brand</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">AI for Business Strategy - MIT Sloan (online)</div><span class="item-badge blue">Curso</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Construir pipeline de renda com AI</div><span class="item-badge orange">Empreend.</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Mentoria ou grupo de estudo AI</div><span class="item-badge orange">Network</span></div></div></div><div class="week-card"><div class="week-header" onclick="toggleSection('rm4')"><div class="week-title">🔵 Fase 4: Autoridade Global (Mês 9-12)</div><div class="week-prog" id="rm4-prog">0/8 completo</div></div><div id="rm4" style="display:none"><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Palestrar em evento internacional AI</div><span class="item-badge purple">Brand</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Certificado AWS/Google/Azure AI</div><span class="item-badge blue">Cert.</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Publicar e-book ou curso AI para empreendedores</div><span class="item-badge orange">Empreend.</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">5.000+ seguidores focados em AI (LinkedIn/Twitter)</div><span class="item-badge purple">Brand</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Colaboração com empresa/startup internacional</div><span class="item-badge orange">Network</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Aparecer em podcast internacional sobre AI</div><span class="item-badge purple">Brand</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Revenue de $5k+/mês com AI services/produtos</div><span class="item-badge orange">Empreend.</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Become go-to AI advisor na sua rede</div><span class="item-badge blue">Liderança</span></div></div></div></div><div id="tab-semana1" class="tab-content"><div class="card"><div class="card-title">📅 Semana 1 - Base e Configuração do Sistema</div><div style="font-size:13px;color:#7aa3c8">Marque as tarefas conforme for completando. O progresso é salvo automaticamente.</div></div><div class="week-card"><div class="week-title" style="margin-bottom:12px">📚 Segunda - Estudo Técnico</div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Iniciar AI for Everyone (DeepLearning.AI) - 1h</div><span class="item-badge blue">Curso</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Ler sobre o estado atual da IA em 2025</div><span class="item-badge orange">Leitura</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Configurar Perplexity AI como ferramenta diária</div><span class="item-badge green">Tool</span></div></div><div class="week-card"><div class="week-title" style="margin-bottom:12px">📚 Terça - Ecossistema</div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Seguir: Andrej Karpathy, Sam Altman, Yann LeCun no Twitter/X</div><span class="item-badge purple">Network</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Assinar newsletter: The Rundown AI, TLDR AI</div><span class="item-badge green">Newsletter</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Adicionar podcast Lex Fridman no Spotify</div><span class="item-badge orange">Podcast</span></div></div><div class="week-card"><div class="week-title" style="margin-bottom:12px">📚 Quarta - Prática</div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Continuar AI for Everyone - Módulo 2</div><span class="item-badge blue">Curso</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Testar Claude/ChatGPT para automatizar 1 tarefa diária</div><span class="item-badge green">Prática</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Escrever aprendizado do dia no Journal</div><span class="item-badge purple">Journal</span></div></div><div class="week-card"><div class="week-title" style="margin-bottom:12px">📚 Quinta - Brand Building</div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Atualizar LinkedIn bio com foco em AI</div><span class="item-badge purple">Brand</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Escrever post sobre por que está estudando AI</div><span class="item-badge purple">Brand</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Pesquisar: casos reais de AI em empresas brasileiras</div><span class="item-badge orange">Pesquisa</span></div></div><div class="week-card"><div class="week-title" style="margin-bottom:12px">📚 Sexta - Revisão + Planejamento</div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Revisar o que aprendeu na semana</div><span class="item-badge blue">Revisão</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Planejar estudo da Semana 2</div><span class="item-badge orange">Plano</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Registrar métricas no Dashboard</div><span class="item-badge green">Sistema</span></div></div><button class="add-btn" onclick="addTask('tab-semana1')">+ Adicionar Tarefa Personalizada</button></div><div id="tab-progresso" class="tab-content"><div class="card"><div class="card-title">📈 Rastreamento de Progresso</div></div><div class="grid grid-2"><div class="card"><div class="card-title">📚 Cursos em Andamento</div><div id="courses-progress"><div style="margin-bottom:16px"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:13px">AI for Everyone</span><span style="font-size:12px;color:#00d4ff" id="c1-pct">0%</span></div><div class="progress-bar"><div class="progress-fill" id="c1-bar" style="width:0%"></div></div><input type="range" min="0" max="100" value="0" style="width:100%;margin-top:8px;accent-color:#00d4ff" oninput="updateCourse('c1',this.value)"></div><div style="margin-bottom:16px"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:13px">ML Specialization</span><span style="font-size:12px;color:#00d4ff" id="c2-pct">0%</span></div><div class="progress-bar"><div class="progress-fill" id="c2-bar" style="width:0%"></div></div><input type="range" min="0" max="100" value="0" style="width:100%;margin-top:8px;accent-color:#00d4ff" oninput="updateCourse('c2',this.value)"></div><div style="margin-bottom:16px"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:13px">AI Agents - LangGraph</span><span style="font-size:12px;color:#00d4ff" id="c3-pct">0%</span></div><div class="progress-bar"><div class="progress-fill" id="c3-bar" style="width:0%"></div></div><input type="range" min="0" max="100" value="0" style="width:100%;margin-top:8px;accent-color:#00d4ff" oninput="updateCourse('c3',this.value)"></div></div></div><div class="card"><div class="card-title">🎯 Metas do Mês</div><div id="metas-list"><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Completar AI for Everyone</div><span class="item-badge blue">Curso</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Publicar 4 posts sobre AI</div><span class="item-badge purple">Brand</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Estudar 20h de AI este mês</div><span class="item-badge orange">Hábito</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">Seguir 10 referências internacionais</div><span class="item-badge green">Network</span></div></div><button class="add-btn" onclick="addMeta()">+ Adicionar Meta</button></div><div class="card"><div class="card-title">⏱ Horas de Estudo</div><div style="display:flex;align-items:center;gap:16px;margin-bottom:16px"><div style="font-size:48px;font-weight:700;color:#00d4ff" id="total-horas">0</div><div><div style="font-size:12px;color:#7aa3c8">horas totais</div><div style="font-size:12px;color:#7aa3c8">Meta: 100h/mês</div></div></div><div class="progress-bar" style="height:12px"><div class="progress-fill" id="horas-bar" style="width:0%"></div></div><div style="margin-top:12px;display:flex;gap:8px"><input type="number" id="add-horas" placeholder="Adicionar horas" class="settings-input" style="flex:1"><button class="btn btn-primary" onclick="addHoras()">+</button></div></div><div class="card"><div class="card-title">🗓️ Registro Semanal</div><div id="registros-list"><div style="color:#7aa3c8;font-size:13px">Nenhum registro ainda.</div></div><button class="add-btn" onclick="addRegistro()">+ Adicionar Registro</button></div></div></div><div id="tab-cursos" class="tab-content"><div class="card"><div class="card-title">🎓 Cursos & Plataformas</div></div><div class="section-title">🔵 Cursos Essenciais - Gratuitos</div><div class="grid grid-2"><div class="link-card"><a href="https://www.deeplearning.ai/courses/ai-for-everyone/" target="_blank">AI for Everyone - DeepLearning.AI</a><div class="desc">Curso sem cod. para entender AI nos negócios. Ideal para começar. Andrew Ng.</div><div class="meta"><span class="badge free">Grátis</span><span class="badge top">⭐ TOP 1</span><span class="badge">6h</span></div></div><div class="link-card"><a href="https://www.deeplearning.ai/courses/generative-ai-for-everyone/" target="_blank">Generative AI for Everyone - DeepLearning.AI</a><div class="desc">Fundamentos de GenAI para qualquer profissional. Foco prático.</div><div class="meta"><span class="badge free">Grátis</span><span class="badge top">⭐ TOP</span><span class="badge">4h</span></div></div><div class="link-card"><a href="https://huggingface.co/learn/agents-course" target="_blank">AI Agents Course - Hugging Face</a><div class="desc">Curso completo de agentes AI da Hugging Face. Estado da arte 2025.</div><div class="meta"><span class="badge free">Grátis</span><span class="badge top">⭐ TOP</span><span class="badge">Avançado</span></div></div><div class="link-card"><a href="https://www.fast.ai" target="_blank">Practical Deep Learning - fast.ai</a><div class="desc">Deep learning prático com Jeremy Howard. Abordagem top-down, hands-on.</div><div class="meta"><span class="badge free">Grátis</span><span class="badge top">⭐ TOP</span><span class="badge">Intermediário</span></div></div><div class="link-card"><a href="https://developers.google.com/machine-learning/crash-course" target="_blank">ML Crash Course - Google</a><div class="desc">Curso técnico rápido de ML pelo Google. Étimo para fundamentos.</div><div class="meta"><span class="badge free">Grátis</span><span class="badge">Técnico</span></div></div><div class="link-card"><a href="https://cs229.stanford.edu" target="_blank">CS229 Machine Learning - Stanford</a><div class="desc">O curso mais famoso de ML do mundo. Acadêmico e profundo.</div><div class="meta"><span class="badge free">Audit Grátis</span><span class="badge top">⭐ Líder</span></div></div></div><div class="section-title">🟡 Cursos Premium - Vale o Investimento</div><div class="grid grid-2"><div class="link-card"><a href="https://www.coursera.org/specializations/machine-learning-introduction" target="_blank">ML Specialization - Coursera (Andrew Ng)</a><div class="desc">3 cursos completos. O melhor programa estruturado de ML. Certificação global.</div><div class="meta"><span class="badge paid">~$49/mês</span><span class="badge top">⭐ TOP 1</span><span class="badge">3 meses</span></div></div><div class="link-card"><a href="https://www.deeplearning.ai/courses/ai-agents-in-langgraph/" target="_blank">AI Agents in LangGraph - DeepLearning.AI</a><div class="desc">Construa agentes AI reais com LangGraph. Habilidade mais demandada em 2025.</div><div class="meta"><span class="badge paid">Pago</span><span class="badge top">⭐ TOP</span><span class="badge">Avançado</span></div></div><div class="link-card"><a href="https://www.udemy.com/course/chatgpt-bard-bing-complete-guide-to-chatgpt-openai-apis/" target="_blank">Complete AI & ChatGPT Guide - Udemy</a><div class="desc">Guia prático completo de AI tools. Melhor custo-benefício do Udemy.</div><div class="meta"><span class="badge paid">~R$40</span><span class="badge">Prático</span></div></div><div class="link-card"><a href="https://www.coursera.org/professional-certificates/tensorflow-in-practice" target="_blank">TensorFlow Developer - Coursera</a><div class="desc">Certificação profissional TensorFlow/Google. Alta empregabilidade.</div><div class="meta"><span class="badge paid">~$49/mês</span><span class="badge">Certificação</span></div></div></div><div class="section-title">🌐 Plataformas de Prática</div><div class="grid grid-3"><div class="link-card"><a href="https://www.kaggle.com" target="_blank">Kaggle</a><div class="desc">Competições, datasets, notebooks. O GitHub dos dados.</div><div class="meta"><span class="badge free">Grátis</span><span class="badge top">⭐</span></div></div><div class="link-card"><a href="https://colab.research.google.com" target="_blank">Google Colab</a><div class="desc">Jupyter notebooks na nuvem com GPU. Essencial para praticar ML.</div><div class="meta"><span class="badge free">Grátis</span></div></div><div class="link-card"><a href="https://huggingface.co" target="_blank">Hugging Face</a><div class="desc">Modelos, datasets, spaces. O hub central da AI open source.</div><div class="meta"><span class="badge free">Grátis</span><span class="badge top">⭐ Essencial</span></div></div></div></div><div id="tab-ecossistema" class="tab-content"><div class="card"><div class="card-title">🌐 Ecossistema de Informação</div><div style="font-size:13px;color:#7aa3c8">Seu filtro curado de conteúdo de alto valor. Siga todas as fontes abaixo.</div></div><div class="section-title">🎙️ Podcasts Internacionais - Top</div><div class="grid grid-3"><div class="link-card"><a href="https://lexfridman.com/podcast" target="_blank">Lex Fridman Podcast</a><div class="desc">Entrevistas profundas com os maiores nomes da AI: Hinton, LeCun, Altman.</div><div class="meta"><span class="badge top">⭐ Must</span><span class="badge">EN</span></div></div><div class="link-card"><a href="https://www.youtube.com/@MachineLearningStreetTalk" target="_blank">Machine Learning Street Talk</a><div class="desc">Discussões técnicas profundas sobre AI/ML. Nível avançado.</div><div class="meta"><span class="badge top">⭐ Técnico</span><span class="badge">EN</span></div></div><div class="link-card"><a href="https://podcasts.apple.com/us/podcast/the-ai-breakdown/id1659450373" target="_blank">The AI Breakdown</a><div class="desc">Análise diária dos avanços em AI. Foco em negócios e impacto.</div><div class="meta"><span class="badge">Diário</span><span class="badge">EN</span></div></div><div class="link-card"><a href="https://www.youtube.com/@a16z" target="_blank">a16z Podcast - AI</a><div class="desc">Andreessen Horowitz: investimento, startups e futuro da AI.</div><div class="meta"><span class="badge top">⭐ Negócios</span><span class="badge">EN</span></div></div><div class="link-card"><a href="https://open.spotify.com/show/2sp5EL7s7EqxttxwwoJ3i7" target="_blank">Hard Fork - NYT</a><div class="desc">Kevin Roose e Casey Newton sobre big tech e AI. Contexto cultural.</div><div class="meta"><span class="badge">Semanal</span><span class="badge">EN</span></div></div><div class="link-card"><a href="https://www.youtube.com/@TwoMinutePapers" target="_blank">Two Minute Papers</a><div class="desc">Resumos visuais dos melhores papers de AI. Excelente para se manter atualizado.</div><div class="meta"><span class="badge free">Grátis</span><span class="badge">YT</span></div></div></div><div class="section-title">📺 YouTube - Canais Essenciais</div><div class="grid grid-3"><div class="link-card"><a href="https://www.youtube.com/@3blue1brown" target="_blank">3Blue1Brown</a><div class="desc">Matemática e neural networks visualizadas de forma brilhante.</div><div class="meta"><span class="badge top">⭐ Essencial</span></div></div><div class="link-card"><a href="https://www.youtube.com/@AndrejKarpathy" target="_blank">Andrej Karpathy</a><div class="desc">Ex-Tesla AI Director. Tutoriais profundos de LLMs e deep learning.</div><div class="meta"><span class="badge top">⭐ Lenda</span></div></div><div class="link-card"><a href="https://www.youtube.com/@samwitteveenai" target="_blank">Sam Witteveen AI</a><div class="desc">Tutoriais práticos de LangChain, LangGraph, AI Agents.</div><div class="meta"><span class="badge">Prático</span></div></div><div class="link-card"><a href="https://www.youtube.com/@matthew_berman" target="_blank">Matthew Berman</a><div class="desc">Reviews e demos dos modelos AI mais recentes. Muito atual.</div><div class="meta"><span class="badge">Atual</span></div></div><div class="link-card"><a href="https://www.youtube.com/@aiexplained-official" target="_blank">AI Explained</a><div class="desc">Análise clara e objetiva dos avancos em AI. Sem hype.</div><div class="meta"><span class="badge top">⭐ Confiável</span></div></div><div class="link-card"><a href="https://www.youtube.com/@YannicKilcher" target="_blank">Yannic Kilcher</a><div class="desc">Explica papers de AI de forma acessível. Técnico mas didático.</div><div class="meta"><span class="badge">Papers</span></div></div></div><div class="section-title">📧 Newsletters</div><div class="grid grid-3"><div class="link-card"><a href="https://www.therundown.ai" target="_blank">The Rundown AI</a><div class="desc">Top newsletter de AI do mundo. Diária. 600k+ assinantes.</div><div class="meta"><span class="badge free">Grátis</span><span class="badge top">⭐ #1</span></div></div><div class="link-card"><a href="https://tldr.tech/ai" target="_blank">TLDR AI</a><div class="desc">Resumo diário dos principais avancos em AI. 5 min/dia.</div><div class="meta"><span class="badge free">Grátis</span><span class="badge top">⭐</span></div></div><div class="link-card"><a href="https://www.bensbites.com" target="_blank">Ben's Bites</a><div class="desc">Curadoria diária de AI com links e contexto. Ben Tossell.</div><div class="meta"><span class="badge free">Grátis</span></div></div><div class="link-card"><a href="https://www.aisnakeoil.com" target="_blank">AI Snake Oil</a><div class="desc">Princeton: desmonta hype e mostra AI real vs. exagero.</div><div class="meta"><span class="badge free">Grátis</span><span class="badge top">⭐ Anti-hype</span></div></div><div class="link-card"><a href="https://import-ai.net" target="_blank">Import AI - Jack Clark</a><div class="desc">Co-fundador Anthropic. Análise séria e técnica de AI semanal.</div><div class="meta"><span class="badge free">Grátis</span></div></div><div class="link-card"><a href="https://www.sequoiacap.com/ideas/" target="_blank">Sequoia AI Blog</a><div class="desc">Perspectiva de investimento e negócios sobre AI da maior VC do Vale.</div><div class="meta"><span class="badge free">Grátis</span></div></div></div><div class="section-title">👥 Pessoas para Seguir (Twitter/X + LinkedIn)</div><div class="grid grid-3"><div class="link-card"><a href="https://twitter.com/sama" target="_blank">Sam Altman (@sama)</a><div class="desc">CEO OpenAI. Visão de futuro AGI e AI safety.</div><div class="meta"><span class="badge top">⭐</span></div></div><div class="link-card"><a href="https://twitter.com/karpathy" target="_blank">Andrej Karpathy (@karpathy)</a><div class="desc">Deep learning, LLMs, tutoriais. Ex-OpenAI, Ex-Tesla.</div><div class="meta"><span class="badge top">⭐ Must</span></div></div><div class="link-card"><a href="https://twitter.com/ylecun" target="_blank">Yann LeCun (@ylecun)</a><div class="desc">Chief AI Scientist Meta. Visões divergentes e pesquisa de ponta.</div><div class="meta"><span class="badge top">⭐</span></div></div><div class="link-card"><a href="https://twitter.com/emostaque" target="_blank">Emad Mostaque</a><div class="desc">Founder Stability AI. AI descentralizada e open-source.</div><div class="meta"><span class="badge">Inovador</span></div></div><div class="link-card"><a href="https://twitter.com/drfeifei" target="_blank">Fei-Fei Li (@drfeifei)</a><div class="desc">"Godmother of AI". Stanford. AI humana e impact social.</div><div class="meta"><span class="badge top">⭐ Líder</span></div></div><div class="link-card"><a href="https://twitter.com/AndrewYNg" target="_blank">Andrew Ng (@AndrewYNg)</a><div class="desc">Co-founder Coursera, DeepLearning.AI. AI democratizada.</div><div class="meta"><span class="badge top">⭐ Must</span></div></div></div><div class="section-title">🌟 Eventos Internacionais</div><div class="grid grid-3"><div class="link-card"><a href="https://sxsw.com" target="_blank">SXSW - Austin TX</a><div class="desc">O maior festival de tech e cultura. AI domina a agenda.</div><div class="meta"><span class="badge">Março</span><span class="badge">EUA</span></div></div><div class="link-card"><a href="https://neurips.cc" target="_blank">NeurIPS</a><div class="desc">A conferência acadêmica mais importante de ML do mundo.</div><div class="meta"><span class="badge">Dezembro</span><span class="badge top">⭐</span></div></div><div class="link-card"><a href="https://icml.cc" target="_blank">ICML</a><div class="desc">International Conference on Machine Learning. Pesquisa de ponta.</div><div class="meta"><span class="badge">Julho</span></div></div></div></div><div id="tab-conteudo" class="tab-content"><div class="card"><div class="card-title">✍️ Plano de Conteúdo - Construindo Autoridade</div><div style="font-size:13px;color:#7aa3c8">Estratégia de conteúdo para se tornar referência em AI no Brasil e no mundo.</div></div><div class="grid grid-2"><div class="card"><div class="card-title">📅 Calendário de Conteúdo</div><div style="font-size:13px;color:#7aa3c8;margin-bottom:12px">Cadencia recomendada para LinkedIn + Instagram/TikTok</div><div class="item-row"><div style="width:80px;font-size:12px;color:#00d4ff">Segunda</div><div class="item-text">💡 Insight ou aprendizado da semana</div></div><div class="item-row"><div style="width:80px;font-size:12px;color:#00d4ff">Quarta</div><div class="item-text">🛠️ Tutorial ou demonstração prática de AI tool</div></div><div class="item-row"><div style="width:80px;font-size:12px;color:#00d4ff">Sexta</div><div class="item-text">📊 Case study: AI aplicada a negócios</div></div><div class="item-row"><div style="width:80px;font-size:12px;color:#aa44ff">Sábado</div><div class="item-text">🎥 Reels/TikTok: 1 descoberta rápida de AI</div></div></div><div class="card"><div class="card-title">📝 Ideias de Conteúdo</div><div id="ideias-list"><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">"5 ferramentas AI que uso todo dia no trabalho"</div><span class="item-badge green">LinkedIn</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">"Como automatizei X horas semanais com AI"</div><span class="item-badge purple">Reels</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">"O que aprendi no ML Specialization"</div><span class="item-badge blue">Artigo</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">"AI para empreendedores: onde começar em 2025"</div><span class="item-badge orange">LinkedIn</span></div><div class="item-row" onclick="toggleItem(this)"><div class="item-check"></div><div class="item-text">"GPT-4 vs Claude vs Gemini: minha experiência real"</div><span class="item-badge green">Thread</span></div></div><button class="add-btn" onclick="addIdeia()">+ Nova Ideia de Conteúdo</button></div><div class="card"><div class="card-title">👁️ Frameworks de Conteúdo</div><div style="margin-bottom:12px"><div style="font-size:13px;font-weight:600;color:#00d4ff;margin-bottom:8px">AIDA para AI Posts</div><div class="item-row"><div style="width:100px;font-size:12px;color:#7aa3c8">Atenção</div><div class="item-text" style="font-size:12px">Hook forte: resultado ou contraste surpreendente</div></div><div class="item-row"><div style="width:100px;font-size:12px;color:#7aa3c8">Interesse</div><div class="item-text" style="font-size:12px">Contexto: por que isso importa para você</div></div><div class="item-row"><div style="width:100px;font-size:12px;color:#7aa3c8">Desejo</div><div class="item-text" style="font-size:12px">Demonstração ou prova real</div></div><div class="item-row"><div style="width:100px;font-size:12px;color:#7aa3c8">Ação</div><div class="item-text" style="font-size:12px">CTA: link, comentário ou pergunta</div></div></div></div><div class="card"><div class="card-title">📊 Métricas de Conteúdo</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div style="text-align:center"><div style="font-size:28px;font-weight:700;color:#00d4ff" id="cnt-posts">0</div><div style="font-size:11px;color:#7aa3c8">Posts Publicados</div></div><div style="text-align:center"><div style="font-size:28px;font-weight:700;color:#aa44ff" id="cnt-seguidores">0</div><div style="font-size:11px;color:#7aa3c8">Seguidores AI</div></div></div><div style="margin-top:12px;display:flex;gap:8px"><input type="number" id="upd-posts" placeholder="Posts" class="settings-input" style="flex:1"><button class="btn btn-primary" onclick="updateMetrics()">Salvar</button></div></div></div></div><div id="tab-journal" class="tab-content"><div class="card"><div class="card-title">📔 Journal de Aprendizado</div><div style="font-size:13px;color:#7aa3c8">Registre insights, reflexões e progressão. Escrever solidifica o aprendizado.</div></div><div class="card"><div class="card-title">Nova Entrada</div><textarea id="journal-input" placeholder="O que aprendi hoje? O que funcionou? O que preciso melhorar?" style="min-height:120px"></textarea><div style="display:flex;gap:8px;margin-top:12px;align-items:center"><select id="journal-tag"><option value="aprendizado">Aprendizado</option><option value="insight">Insight</option><option value="projeto">Projeto</option><option value="networking">Networking</option><option value="reflexao">Reflexão</option></select><button class="btn btn-primary" onclick="saveJournal()" style="margin-left:auto">Salvar Entrada</button></div></div><div id="journal-entries"><div style="color:#7aa3c8;font-size:13px;text-align:center;padding:20px">Nenhuma entrada ainda. Comece escrevendo acima!</div></div></div><div id="tab-config" class="tab-content"><div class="card"><div class="card-title">⚙️ Configurações do Sistema</div><div style="font-size:13px;color:#7aa3c8">Personalize o dashboard, gerencie dados e ajuste suas preferências.</div></div><div class="grid grid-2"><div class="card"><div class="card-title">👤 Perfil</div><div class="settings-section"><div class="settings-label">Seu Nome</div><input type="text" class="settings-input" id="cfg-nome" placeholder="Leonardo Carletti"></div><div class="settings-section"><div class="settings-label">Meta de Horas/Mês</div><input type="number" class="settings-input" id="cfg-meta-horas" placeholder="100" value="100"></div><div class="settings-section"><div class="settings-label">Fase Atual do Roadmap</div><select class="settings-input" id="cfg-fase"><option value="1">Fase 1 - Fundamentos</option><option value="2">Fase 2 - Aprofundamento</option><option value="3">Fase 3 - Especializacao</option><option value="4">Fase 4 - Autoridade Global</option></select></div><button class="btn btn-primary" onclick="saveConfig()" style="margin-top:8px">Salvar Configurações</button></div><div class="card"><div class="card-title">🎯 Metas Customizadas</div><div class="settings-section"><div class="settings-label">Meta de Posts/Mês</div><input type="number" class="settings-input" id="cfg-meta-posts" placeholder="12"></div><div class="settings-section"><div class="settings-label">Meta de Seguidores</div><input type="number" class="settings-input" id="cfg-meta-seg" placeholder="1000"></div><div class="settings-section"><div class="settings-label">Seu LinkedIn URL</div><input type="text" class="settings-input" id="cfg-linkedin" placeholder="linkedin.com/in/seuperfil"></div><button class="btn btn-primary" onclick="saveConfig()" style="margin-top:8px">Salvar</button></div><div class="card"><div class="card-title">💾 Dados</div><div style="display:flex;flex-direction:column;gap:8px"><button class="btn btn-secondary" onclick="exportData()">Exportar Dados (JSON)</button><button class="btn btn-secondary" onclick="importData()">Importar Dados</button><button class="btn btn-danger" onclick="resetData()">Resetar Todos os Dados</button></div><div style="font-size:11px;color:#7aa3c8;margin-top:12px">⚠️ Os dados são salvos no localStorage do seu navegador. Use Exportar para fazer backup.</div></div><div class="card"><div class="card-title">🔗 Links Rápidos</div><div style="display:flex;flex-direction:column;gap:8px"><a href="https://github.com/LeonardoCarletti/ai-authority-os" target="_blank" class="btn btn-secondary" style="text-decoration:none;text-align:center">🐈 Repositório GitHub</a><a href="https://www.deeplearning.ai" target="_blank" class="btn btn-secondary" style="text-decoration:none;text-align:center">🎓 DeepLearning.AI</a><a href="https://www.coursera.org" target="_blank" class="btn btn-secondary" style="text-decoration:none;text-align:center">🎓 Coursera</a><a href="https://huggingface.co" target="_blank" class="btn btn-secondary" style="text-decoration:none;text-align:center">🤗 Hugging Face</a></div></div></div></div></div><script>var data={dias:0,streak:0,horas:0,posts:0,seguidores:0,metaHoras:100,metaPosts:12,focos:[],metas:[],registros:[],ideias:[],journal:[],checkedItems:{},courseProgress:{c1:0,c2:0,c3:0},weekActivity:[0,0,0,0,0,0,0]};function loadData(){var s=localStorage.getItem('ai-authority-os');if(s){try{data=Object.assign(data,JSON.parse(s));}catch(e){}}renderAll();}function saveData(){localStorage.setItem('ai-authority-os',JSON.stringify(data));}function showTab(t){document.querySelectorAll('.tab-content').forEach(function(e){e.classList.remove('active');});document.querySelectorAll('.nav-btn').forEach(function(e){e.classList.remove('active');});var el=document.getElementById('tab-'+t);if(el)el.classList.add('active');var btns=document.querySelectorAll('.nav-btn');btns.forEach(function(b){if(b.getAttribute('onclick')&&b.getAttribute('onclick').indexOf(t)>-1)b.classList.add('active');});}function toggleItem(row){var check=row.querySelector('.item-check');var txt=row.querySelector('.item-text');var id=row.getAttribute('data-id')||row.innerText.substring(0,30);if(check.classList.contains('done')){check.classList.remove('done');txt.classList.remove('done');data.checkedItems[id]=false;}else{check.classList.add('done');txt.classList.add('done');data.checkedItems[id]=true;updateStreak();}saveData();updateMetrics();}function toggleSection(id){var el=document.getElementById(id);if(!el)return;el.style.display=el.style.display==='none'?'block':'none';}function updateStreak(){data.dias++;data.streak++;var today=new Date().toDateString();var lastDay=data.lastStudyDay;if(lastDay===today)return;data.lastStudyDay=today;var dayOfWeek=new Date().getDay();if(dayOfWeek>0&&dayOfWeek<7)data.weekActivity[dayOfWeek-1]=(data.weekActivity[dayOfWeek-1]||0)+1;saveData();}function addHoras(){var v=parseInt(document.getElementById('add-horas').value)||0;if(v<=0)return;data.horas+=v;document.getElementById('add-horas').value='';updateStreak();saveData();renderMetrics();}function updateCourse(id,val){data.courseProgress[id]=parseInt(val);document.getElementById(id+'-pct').textContent=val+'%';document.getElementById(id+'-bar').style.width=val+'%';saveData();}function renderMetrics(){var dias=document.getElementById('m-dias');var cursos=document.getElementById('m-cursos');var tasks=document.getElementById('m-tasks');var posts=document.getElementById('m-posts');var streak=document.getElementById('m-streak');if(dias)dias.textContent=data.dias;var cp=data.courseProgress;var avg=Math.round(((cp.c1||0)+(cp.c2||0)+(cp.c3||0))/3);if(cursos)cursos.textContent=avg+'%';if(document.getElementById('p-cursos'))document.getElementById('p-cursos').style.width=avg+'%';var checked=Object.values(data.checkedItems).filter(Boolean).length;var total=Object.keys(data.checkedItems).length||1;var taskPct=Math.round(checked/Math.max(total,15)*100);if(tasks)tasks.textContent=taskPct+'%';if(document.getElementById('p-tasks'))document.getElementById('p-tasks').style.width=taskPct+'%';if(posts)posts.textContent=data.posts;if(streak)streak.textContent=data.streak;if(document.getElementById('p-streak'))document.getElementById('p-streak').style.width=Math.min(data.streak*10,100)+'%';var niveis=['Iniciante','Aprendiz','Praticante','Especialista','Autoridade'];var nivel=Math.min(Math.floor(taskPct/20),4);var emojis=['🤔','📚','💻','🚀','🏆'];if(document.getElementById('m-nivel'))document.getElementById('m-nivel').textContent=emojis[nivel];if(document.getElementById('nivel-label'))document.getElementById('nivel-label').textContent=niveis[nivel];var horasEl=document.getElementById('total-horas');if(horasEl)horasEl.textContent=data.horas;if(document.getElementById('horas-bar'))document.getElementById('horas-bar').style.width=Math.min(data.horas/data.metaHoras*100,100)+'%';if(document.getElementById('cnt-posts'))document.getElementById('cnt-posts').textContent=data.posts;if(document.getElementById('cnt-seguidores'))document.getElementById('cnt-seguidores').textContent=data.seguidores;}function renderWeekChart(){var chart=document.getElementById('weekly-chart');var labels=document.getElementById('weekly-labels');if(!chart)return;var days=['Seg','Ter','Qua','Qui','Sex','Sab','Dom'];var max=Math.max.apply(null,data.weekActivity)||1;chart.innerHTML='';labels.innerHTML='';days.forEach(function(d,i){var h=Math.max((data.weekActivity[i]||0)/max*70,4);var bar=document.createElement('div');bar.className='bar';bar.style.height=h+'px';chart.appendChild(bar);var lbl=document.createElement('div');lbl.className='bar-label';lbl.style.flex='1';lbl.textContent=d;labels.appendChild(lbl);});}function renderFocos(){var list=document.getElementById('focos-list');if(!list)return;list.innerHTML='';(data.focos||[]).forEach(function(f,i){var div=document.createElement('div');div.className='item-row';div.innerHTML='<div class="item-check'+(f.done?' done':'')+'"></div><div class="item-text'+(f.done?' done':'')+'">'+f.text+'</div><span class="item-badge orange">Foco</span>';div.onclick=function(){data.focos[i].done=!data.focos[i].done;saveData();renderFocos();};list.appendChild(div);});}function addFoco(){var t=prompt('Qual é o seu foco desta semana?');if(t){data.focos.push({text:t,done:false});saveData();renderFocos();}}function addMeta(){var t=prompt('Nova meta:');if(t){var list=document.getElementById('metas-list');var div=document.createElement('div');div.className='item-row';div.onclick=function(){toggleItem(div);};div.innerHTML='<div class="item-check"></div><div class="item-text">'+t+'</div><span class="item-badge blue">Meta</span>';list.appendChild(div);}}function addIdeia(){var t=prompt('Ideia de conteúdo:');if(t){var list=document.getElementById('ideias-list');var div=document.createElement('div');div.className='item-row';div.onclick=function(){toggleItem(div);};div.innerHTML='<div class="item-check"></div><div class="item-text">'+t+'</div><span class="item-badge green">Ideia</span>';list.appendChild(div);}}function addRegistro(){var t=prompt('Resumo da semana:');if(t){data.registros.push({date:new Date().toLocaleDateString('pt-BR'),text:t});saveData();renderRegistros();}}function renderRegistros(){var list=document.getElementById('registros-list');if(!list)return;if(!data.registros.length){list.innerHTML='<div style="color:#7aa3c8;font-size:13px">Nenhum registro ainda.</div>';return;}list.innerHTML='';data.registros.slice().reverse().forEach(function(r){var div=document.createElement('div');div.className='journal-entry';div.innerHTML='<div class="journal-date">'+r.date+'</div><div class="journal-text">'+r.text+'</div>';list.appendChild(div);});}function saveJournal(){var txt=document.getElementById('journal-input').value.trim();var tag=document.getElementById('journal-tag').value;if(!txt)return;data.journal.push({date:new Date().toLocaleDateString('pt-BR'),time:new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}),text:txt,tag:tag});document.getElementById('journal-input').value='';saveData();renderJournal();}function renderJournal(){var container=document.getElementById('journal-entries');if(!container)return;if(!data.journal.length){container.innerHTML='<div style="color:#7aa3c8;font-size:13px;text-align:center;padding:20px">Nenhuma entrada ainda. Comece escrevendo acima!</div>';return;}container.innerHTML='';data.journal.slice().reverse().forEach(function(j){var div=document.createElement('div');div.className='journal-entry';var colors={aprendizado:'#00d4ff',insight:'#aa44ff',projeto:'#00ff88',networking:'#ff8800',reflexao:'#ff4444'};var c=colors[j.tag]||'#7aa3c8';div.innerHTML='<div class="journal-date">'+j.date+' '+j.time+' &bull; <span style="color:'+c+'">'+j.tag+'</span></div><div class="journal-text">'+j.text+'</div><button onclick="deleteJournal('+data.journal.indexOf(j)+')" style="background:none;border:none;color:#ff4444;cursor:pointer;font-size:11px;margin-top:8px">🗑️ Deletar</button>';container.appendChild(div);});}function deleteJournal(i){if(confirm('Deletar esta entrada?')){data.journal.splice(i,1);saveData();renderJournal();}}function renderRecentJournal(){var el=document.getElementById('recent-journal');if(!el)return;if(!data.journal.length){el.innerHTML='<div style="color:#7aa3c8;font-size:13px">Nenhuma anotação ainda.</div>';return;}el.innerHTML='';data.journal.slice(-3).reverse().forEach(function(j){var div=document.createElement('div');div.style.cssText='padding:8px;border-left:2px solid #00d4ff;margin-bottom:8px;font-size:12px;color:#e2e8f0';div.textContent=j.date+': '+j.text.substring(0,80)+(j.text.length>80?'...':'');el.appendChild(div);});}function updateMetrics(){var p=parseInt(document.getElementById('upd-posts')||{value:data.posts}).value||data.posts;data.posts=p;renderMetrics();}function saveConfig(){var nome=document.getElementById('cfg-nome');var horas=document.getElementById('cfg-meta-horas');if(nome)data.nome=nome.value;if(horas)data.metaHoras=parseInt(horas.value)||100;saveData();alert('Configurações salvas!');}function exportData(){var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='ai-authority-backup.json';a.click();}function importData(){var input=document.createElement('input');input.type='file';input.accept='.json';input.onchange=function(e){var reader=new FileReader();reader.onload=function(ev){try{data=JSON.parse(ev.target.result);saveData();renderAll();alert('Dados importados!');}catch(err){alert('Erro ao importar.');}};reader.readAsText(e.target.files[0]);};input.click();}function resetData(){if(confirm('Tem certeza? Todos os dados serão perdidos!')){localStorage.removeItem('ai-authority-os');location.reload();}}function loadConfig(){var nome=document.getElementById('cfg-nome');var horas=document.getElementById('cfg-meta-horas');if(nome&&data.nome)nome.value=data.nome;if(horas)horas.value=data.metaHoras||100;var c=data.courseProgress||{};['c1','c2','c3'].forEach(function(id){var bar=document.getElementById(id+'-bar');var pct=document.getElementById(id+'-pct');var inp=document.querySelector('[oninput*="'+id+'"]');if(bar)bar.style.width=(c[id]||0)+'%';if(pct)pct.textContent=(c[id]||0)+'%';if(inp)inp.value=c[id]||0;});}function renderAll(){renderMetrics();renderWeekChart();renderFocos();renderRegistros();renderJournal();renderRecentJournal();loadConfig();}document.addEventListener('DOMContentLoaded',loadData);</script></body></html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Authority OS - Sistema de Crescimento em IA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+            flex-wrap: wrap;
+        }
+        
+        .tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 1em;
+            font-weight: 600;
+            color: #6c757d;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .tab:hover {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+        
+        .tab.active {
+            color: #667eea;
+            background: white;
+        }
+        
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #667eea;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+        }
+        
+        .metric-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .progress-bar {
+            background: #e9ecef;
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.5s;
+        }
+        
+        .resource-list {
+            list-style: none;
+        }
+        
+        .resource-item {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s;
+        }
+        
+        .resource-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+        
+        .resource-item h4 {
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+        
+        .resource-item p {
+            color: #6c757d;
+            font-size: 0.9em;
+            margin: 5px 0;
+        }
+        
+        .resource-item a {
+            color: #764ba2;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .resource-item a:hover {
+            text-decoration: underline;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin: 5px 5px 5px 0;
+        }
+        
+        .badge-premium {
+            background: #ffd700;
+            color: #000;
+        }
+        
+        .badge-free {
+            background: #28a745;
+            color: white;
+        }
+        
+        .badge-us {
+            background: #007bff;
+            color: white;
+        }
+        
+        .badge-china {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .roadmap-month {
+            background: white;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .roadmap-month h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .roadmap-month ul {
+            list-style-position: inside;
+            color: #6c757d;
+        }
+        
+        .roadmap-month li {
+            margin: 8px 0;
+            padding-left: 10px;
+        }
+        
+        .input-group {
+            margin: 15px 0;
+        }
+        
+        .input-group label {
+            display: block;
+            color: #495057;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .input-group input,
+        .input-group textarea,
+        .input-group select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #dee2e6;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border 0.3s;
+        }
+        
+        .input-group input:focus,
+        .input-group textarea:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .section-title {
+            color: #667eea;
+            font-size: 1.8em;
+            margin: 30px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 AI Authority OS</h1>
+            <p>Sistema Completo de Crescimento Profissional em Inteligência Artificial</p>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="openTab(event, 'dashboard')">📊 Dashboard</button>
+            <button class="tab" onclick="openTab(event, 'cursos')">🎓 Cursos & Certificações</button>
+            <button class="tab" onclick="openTab(event, 'influencers')">👥 Influencers & Comunidade</button>
+            <button class="tab" onclick="openTab(event, 'roadmap')">🗺️ Roadmap Mensal</button>
+            <button class="tab" onclick="openTab(event, 'conteudo')">📝 Plano de Conteúdo</button>
+            <button class="tab" onclick="openTab(event, 'acompanhamento')">📈 Acompanhamento</button>
+        </div>
+        
+        <div class="content">
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-content active">
+                <h2 class="section-title">Visão Geral do Progresso</h2>
+                
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <h3>📚 Cursos Concluídos</h3>
+                        <div class="metric">
+                            <span class="metric-value" id="cursos-concluidos">0</span>
+                            <span>/12</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%" id="progress-cursos"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>🎯 Horas de Estudo</h3>
+                        <div class="metric">
+                            <span class="metric-value" id="horas-estudo">0</span>
+                            <span>/500h</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%" id="progress-horas"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>📝 Projetos Práticos</h3>
+                        <div class="metric">
+                            <span class="metric-value" id="projetos">0</span>
+                            <span>/20</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%" id="progress-projetos"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>🌐 Network Global</h3>
+                        <div class="metric">
+                            <span class="metric-value" id="network">0</span>
+                            <span>/100</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%" id="progress-network"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>🎯 Metas Atuais</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 10px; margin: 5px 0; background: #f8f9fa; border-radius: 5px;">✅ Completar curso AI for Business Strategy (MIT)</li>
+                        <li style="padding: 10px; margin: 5px 0; background: #f8f9fa; border-radius: 5px;">⏳ Iniciar especialização em GenAI</li>
+                        <li style="padding: 10px; margin: 5px 0; background: #f8f9fa; border-radius: 5px;">⏳ Conectar com 5 líderes de IA no LinkedIn</li>
+                        <li style="padding: 10px; margin: 5px 0; background: #f8f9fa; border-radius: 5px;">⏳ Publicar primeiro artigo sobre IA</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Cursos Tab -->
+            <div id="cursos" class="tab-content">
+                <h2 class="section-title">🎓 Cursos & Certificações de Alto Impacto</h2>
+                
+                <h3 style="color:#764ba2; margin:20px 0 15px;">Nível 1 - Fundação (Meses 1-3)</h3>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <h4>AI for Business Strategy - MIT Sloan</h4>
+                        <p>6 semanas, 6-8h/semana | Foco: Implicções de IA para negócios e estratégia</p>
+                        <p><span class="badge badge-premium">Pago ~$3,200</span><span class="badge badge-us">MIT</span></p>
+                        <p><a href="https://sloan.mit.edu/professional-programs/executive-education" target="_blank">Acessar Curso</a></p>
+                    </li>
+                    <li class="resource-item">
+                        <h4>AI Essentials for Business - Harvard Business School Online</h4>
+                        <p>4 semanas, 5-7h/semana | Como liderar organizações com IA</p>
+                        <p><span class="badge badge-premium">Pago $1,850</span><span class="badge badge-us">HBS</span></p>
+                        <p><a href="https://online.hbs.edu/courses/ai-for-leaders" target="_blank">Acessar Curso</a></p>
+                    </li>
+                    <li class="resource-item">
+                        <h4>AI For Everyone - Andrew Ng (DeepLearning.AI / Coursera)</h4>
+                        <p>~6h total | Conceitos, estratégia e execução de IA para não-técnicos</p>
+                        <p><span class="badge badge-free">Gratuito ou ~$50</span><span class="badge badge-us">Coursera</span></p>
+                        <p><a href="https://www.coursera.org/learn/ai-for-everyone" target="_blank">Acessar Curso</a></p>
+                    </li>
+                    <li class="resource-item">
+                        <h4>Elements of AI - Universidade de Helsinki + MinnaLearn</h4>
+                        <p>~30h | Fundamentos de IA de forma acessível e gratuita</p>
+                        <p><span class="badge badge-free">100% Gratuito</span></p>
+                        <p><a href="https://www.elementsofai.com/" target="_blank">Acessar Curso</a></p>
+                    </li>
+                </ul>
+                
+                <h3 style="color:#764ba2; margin:20px 0 15px;">Nível 2 - Aplicação e IA Generativa (Meses 4-7)</h3>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <h4>Generative AI Specialization - DeepLearning.AI (Andrew Ng)</h4>
+                        <p>5 cursos | Prompt Engineering, RAG, Agentes de IA, LLMs na prática</p>
+                        <p><span class="badge badge-premium">$50/mês Coursera</span><span class="badge badge-us">DeepLearning.AI</span></p>
+                        <p><a href="https://www.deeplearning.ai/courses/" target="_blank">Acessar Cursos</a></p>
+                    </li>
+                    <li class="resource-item">
+                        <h4>AI for Business Innovation - Imperial College London</h4>
+                        <p>6 semanas | Inovação com GenAI, tomádas de decisão estratégica</p>
+                        <p><span class="badge badge-premium">$2,050</span><span class="badge badge-us">Imperial</span></p>
+                        <p><a href="https://execed.imperial.ac.uk/" target="_blank">Acessar Curso</a></p>
+                    </li>
+                    <li class="resource-item">
+                        <h4>AI Strategy & Governance - Wharton / Coursera</h4>
+                        <p>Especialização em IA | Governança, ética, política de IA</p>
+                        <p><span class="badge badge-premium">$50/mês</span><span class="badge badge-us">Wharton</span></p>
+                        <p><a href="https://www.coursera.org/learn/ai-strategy-and-governance" target="_blank">Acessar Curso</a></p>
+                    </li>
+                    <li class="resource-item">
+                        <h4>Prompt Engineering + Agentes de IA - Promptly AI / Hugging Face</h4>
+                        <p>Prático e atualizado | Engenharia de prompts, agentes, automação</p>
+                        <p><span class="badge badge-free">Gratuito</span></p>
+                        <p><a href="https://huggingface.co/learn" target="_blank">Hugging Face Learn</a> | <a href="https://learnprompting.org/" target="_blank">Learn Prompting</a></p>
+                    </li>
+                </ul>
+                
+                <h3 style="color:#764ba2; margin:20px 0 15px;">Nível 3 - Autoridade e Empreendedorismo em IA (Meses 8-12)</h3>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <h4>AI for Business Leaders - Udacity</h4>
+                        <p>Aplicação real de IA em negócios, ferramentas práticas</p>
+                        <p><span class="badge badge-premium">$399/mês</span><span class="badge badge-us">Udacity</span></p>
+                        <p><a href="https://www.udacity.com/course/ai-for-business-leaders--nd054" target="_blank">Acessar Curso</a></p>
+                    </li>
+                    <li class="resource-item">
+                        <h4>Oxford Artificial Intelligence Programme</h4>
+                        <p>6 semanas | Oxford Saïd Business School | IA estratégica para CEOs</p>
+                        <p><span class="badge badge-premium">£2,500+</span><span class="badge badge-us">Oxford</span></p>
+                        <p><a href="https://www.sbs.ox.ac.uk/programmes/executive-education/online-programmes/oxford-artificial-intelligence-programme" target="_blank">Acessar Curso</a></p>
+                    </li>
+                    <li class="resource-item">
+                        <h4>YC Startup School - Empreendedorismo + IA</h4>
+                        <p>Y Combinator | Construir startups de IA do zero</p>
+                        <p><span class="badge badge-free">100% Gratuito</span><span class="badge badge-us">Y Combinator</span></p>
+                        <p><a href="https://www.startupschool.org/" target="_blank">Acessar Curso</a></p>
+                    </li>
+                    <li class="resource-item">
+                        <h4>Fast.ai - Practical Deep Learning</h4>
+                        <p>Mais prático e profundo para quem quer dominar tecnicamente</p>
+                        <p><span class="badge badge-free">100% Gratuito</span><span class="badge badge-us">fast.ai</span></p>
+                        <p><a href="https://course.fast.ai/" target="_blank">Acessar Curso</a></p>
+                    </li>
+                </ul>
+            </div>
+            <!-- Influencers Tab -->
+            <div id="influencers" class="tab-content">
+                <h2 class="section-title">👥 Rede de Consumo: Influencers, Podcasts & Comunidades</h2>
+                
+                <h3 style="color:#764ba2; margin:20px 0 15px;">🎙️ Podcasts de Alto Nível (EUA)</h3>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <h4>Lex Fridman Podcast</h4>
+                        <p>Entrevistas profundas com OpenAI, DeepMind, Google, researchers e CEOs de IA</p>
+                        <p><a href="https://lexfridman.com/podcast/" target="_blank">lexfridman.com/podcast</a> | YouTube: Lex Fridman</p>
+                    </li>
+                    <li class="resource-item">
+                        <h4>The AI Breakdown (Nathan Labenz)</h4>
+                        <p>Análise diária sobre notícias e impactos de IA nos negócios</p>
+                        <p><a href="https://www.youtube.com/@NathanLabenz" target="_blank">Spotify / YouTube: The AI Breakdown</a></p>
+                    </li>
+                    <li class="resource-item">
+                        <h4>a16z Podcast (Andreessen Horowitz)</h4>
+                        <p>Como VCs estão investindo em IA, tendências de mercado</p>
+                        <p><a href="https://a16z.com/podcasts/" target="_blank">a16z.com/podcasts</a></p>
+                    </li>
+                    <li class="resource-item">
+                        <h4>Cognitive Revolution (Nathan Labenz)</h4>
+                        <p>Casos reais de uso de IA nas empresas, entrevistas com especialistas</p>
+                        <p><a href="https://www.cognitiverevolution.ai/" target="_blank">cognitiverevolution.ai</a></p>
+                    </li>
+                    <li class="resource-item">
+                        <h4>NVIDIA AI Podcast</h4>
+                        <p>Mais técnico, mas com foco em aplicações reais de IA corporativa</p>
+                        <p><a href="https://blogs.nvidia.com/ai-podcast/" target="_blank">NVIDIA AI Podcast</a></p>
+                    </li>
+                </ul>
+                
+                <h3 style="color:#764ba2; margin:20px 0 15px;">📱 YouTube (Prático + Business)</h3>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <h4>Two Minute Papers</h4>
+                        <p>Vídeos curtos e visuais sobre as mais recentes pesquisas de IA</p>
+                        <p><a href="https://www.youtube.com/@TwoMinutePapers" target="_blank">@TwoMinutePapers</a></p>
+                    </li>
+                    <li class="resource-item">
+                        <h4>Matt Wolfe</h4>
+                        <p>Ferramentas de IA, automação e aplicações práticas para criadores e empreendedores</p>
+                        <p><a href="https://www.youtube.com/@mreflow" target="_blank">@mreflow</a></p>
+                    </li>
+                    <li class="resource-item">
+                        <h4>Sam Altman (OpenAI) - Entrevistas & Talks</h4>
+                        <p>Visão de futuro de IA e negócios | Buscar entrevistas no YouTube</p>
+                        <p><a href="https://www.youtube.com/results?search_query=sam+altman+ai+talk" target="_blank">Sam Altman Talks</a></p>
+                    </li>
+                    <li class="resource-item">
+                        <h4>DeepLearning.AI - Andrew Ng</h4>
+                        <p>Canal oficial com cursos, lectures e conteúdo estratégico</p>
+                        <p><a href="https://www.youtube.com/@Deeplearningai" target="_blank">@Deeplearningai</a></p>
+                    </li>
+                    <li class="resource-item">
+                        <h4>Fireship</h4>
+                        <p>Tecnologia e IA aplicada ao desenvolvimento, ritmo acelerado</p>
+                        <p><a href="https://www.youtube.com/@Fireship" target="_blank">@Fireship</a></p>
+                    </li>
+                </ul>
+                
+                <h3 style="color:#764ba2; margin:20px 0 15px;">🔵 Influencers LinkedIn / X (Twitter) - Seguir Agora</h3>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <h4>Andrew Ng</h4>
+                        <p>Fundador do DeepLearning.AI, ex-Google Brain. Referência máxima em IA acadêmico-prática</p>
+                        <p><a href="https://www.linkedin.com/in/andrewyng/" target="_blank">LinkedIn</a> | <a href="https://twitter.com/AndrewYNg" target="_blank">Twitter: @AndrewYNg</a></p>
+                    </li>
+                    <li class="resource-item">
+                        <h4>Jensen Huang</h4>
+                        <p>CEO NVIDIA | Principal voz sobre hardware + IA + futuro da computação</p>
+                        <p><a href="https://twitter.com/jensenhuang" target="_blank">Twitter: @jensenhuang</a></p>
+                    </li>
+                    <li class="resource-item">
+                        <h4>Allie K. Miller</h4>
+                        <p>CEO Open Machine | Ex-Amazon AI | Referência em IA para negócios</p>
+                        <p><a href="https://www.linkedin.com/in/alliekmiller/" target="_blank">LinkedIn: @alliekmiller</a></p>
+                    </li>
+                    <li class="resource-item">
+                        <h4>Fei-Fei Li</h4>
+                        <p>Co-fundadora Stanford HAI, Fundadora World Labs | Pioneira em visão computacional</p>
+                        <p><a href="https://twitter.com/drfeifei" target="_blank">Twitter: @drfeifei</a></p>
+                    </li>
+                    <li class="resource-item">
+                        <h4>Emad Mostaque</h4>
+                        <p>Fundador Stability AI | Foco em IA open-source e democrática</p>
+                        <p><a href="https://twitter.com/EMostaque" target="_blank">Twitter: @EMostaque</a></p>
+                    </li>
+                    <li class="resource-item">
+                        <h4>Li Robin (Li Yanhong) - China</h4>
+                        <p>CEO Baidu | Referência máxima em IA chinesa e modelos de linguagem</p>
+                        <span class="badge badge-china">China</span>
+                        <p><a href="https://www.linkedin.com/in/robin-li-1b4b5b1b/" target="_blank">LinkedIn</a></p>
+                    </li>
+                </ul>
+                
+                <h3 style="color:#764ba2; margin:20px 0 15px;">🌍 Conferências e Eventos Globais</h3>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <h4>SXSW - AI Track (Austin, TX)</h4>
+                        <p>O maior festival de tecnologia e innovação dos EUA, forte foco em IA</p>
+                        <p><a href="https://sxsw.com/conference/artificial-intelligence-track/" target="_blank">sxsw.com</a></p>
+                    </li>
+                    <li class="resource-item">
+                        <h4>Ai4 Conference (Las Vegas)</h4>
+                        <p>A maior conferência de IA empresarial da América do Norte</p>
+                        <p><a href="https://ai4.io/" target="_blank">ai4.io</a></p>
+                    </li>
+                    <li class="resource-item">
+                        <h4>NeurIPS / ICML / ICLR</h4>
+                        <p>Principais conferências acadêmicas de IA no mundo</p>
+                        <p><a href="https://neurips.cc/" target="_blank">NeurIPS</a> | <a href="https://icml.cc/" target="_blank">ICML</a></p>
+                    </li>
+                    <li class="resource-item">
+                        <h4>World Economic Forum - AI Sessions (Davos)</h4>
+                        <p>IA + negócios + política global</p>
+                        <p><a href="https://www.weforum.org/" target="_blank">weforum.org</a></p>
+                    </li>
+                </ul>
+            </div>
+            <!-- Roadmap Tab -->
+            <div id="roadmap" class="tab-content">
+                <h2 class="section-title">🗺️ Roadmap Mensal - 12 Meses para a Autoridade</h2>
+                
+                <div class="roadmap-month">
+                    <h3>🟡 Meses 1-2: BASE SÓLIDA</h3>
+                    <ul>
+                        <li>Concluir "AI for Everyone" (Andrew Ng, Coursera) - Gratuito</li>
+                        <li>Ler: "Human Compatible" (Stuart Russell) + "The Coming Wave" (Mustafa Suleyman)</li>
+                        <li>Seguir todos os influencers listados no painel</li>
+                        <li>Ouvir 15 episódios do Lex Fridman Podcast</li>
+                        <li>Criar perfil LinkedIn profissional focado em IA</li>
+                        <li>Iniciar Elements of AI (Helsinki)</li>
+                        <li>Definir nicho: IA aplicada a qual área do seu negócio?</li>
+                    </ul>
+                </div>
+                
+                <div class="roadmap-month">
+                    <h3>🟠 Meses 3-4: APROFUNDAMENTO TÉCNICO E ESTRATÉGICO</h3>
+                    <ul>
+                        <li>Iniciar AI Essentials for Business (Harvard Business School Online)</li>
+                        <li>Participar do SXSW ou assistir aos vídeos online do AI Track</li>
+                        <li>Estudar casos de uso: Baidu, Alibaba DAMO, OpenAI na prática</li>
+                        <li>Publicar primeiro post técnico sobre IA no LinkedIn</li>
+                        <li>Criar primeiro projeto prático: Chatbot ou automacão com LLM</li>
+                        <li>Entrar em 3 comunidades de IA (Discord / Slack / Reddit)</li>
+                        <li>Ouvir Cognitive Revolution semanalmente</li>
+                    </ul>
+                </div>
+                
+                <div class="roadmap-month">
+                    <h3>🟢 Meses 5-6: ESPECIALIZAÇÃO E PROJETOS REAIS</h3>
+                    <ul>
+                        <li>Iniciar Generative AI Specialization (DeepLearning.AI)</li>
+                        <li>Aplicar IA em um projeto real do seu empreendimento</li>
+                        <li>Participar de hackathon de IA (OnlineGPT ou Lablab.ai)</li>
+                        <li>Publicar 2 artigos técnicos no Medium / LinkedIn / Substack</li>
+                        <li>Conectar com 20 especialistas de IA no LinkedIn</li>
+                        <li>Estudar DeepSeek (China) e modelos open-source relevantes</li>
+                        <li>Criar newsletter semanal sobre IA para sua rede</li>
+                    </ul>
+                </div>
+                
+                <div class="roadmap-month">
+                    <h3>🔵 Meses 7-8: LIDERANÇA E VISIBILIDADE</h3>
+                    <ul>
+                        <li>Falar em evento sobre IA (meetup local ou webinar)</li>
+                        <li>Iniciar Oxford AI Programme ou AI Strategy (Wharton)</li>
+                        <li>Criar conteúdo no TikTok / Instagram sobre aplicações práticas de IA</li>
+                        <li>Lancar piloto de produto/serviço baseado em IA</li>
+                        <li>Montar portfólio de 5 projetos de IA no GitHub</li>
+                        <li>Participar online na Ai4 Conference (Las Vegas)</li>
+                        <li>Iniciar mentorado com especialista de IA (LinkedIn)</li>
+                    </ul>
+                </div>
+                
+                <div class="roadmap-month">
+                    <h3>🟣 Meses 9-10: EMPREENDEDORISMO E ESCALA</h3>
+                    <ul>
+                        <li>Completar YC Startup School</li>
+                        <li>Lancar produto de IA ou consultoria especializada</li>
+                        <li>Ter 500+ seguidores no LinkedIn com conteúdo de IA</li>
+                        <li>Estudar modelo de negócio das AI startups de sucesso (a16z portfolio)</li>
+                        <li>Criar deck de pitch para produto/solucão de IA</li>
+                        <li>Publicar case study do seu projeto de IA</li>
+                        <li>Definir estratégia de monetizacão com IA</li>
+                    </ul>
+                </div>
+                
+                <div class="roadmap-month">
+                    <h3>🟤 Meses 11-12: AUTORIDADE CONSOLIDADA</h3>
+                    <ul>
+                        <li>Estar entre top 1% de profissionais de IA no Brasil</li>
+                        <li>Ter portfolio com 10+ projetos de IA documentados</li>
+                        <li>500+ conexões globais de IA no LinkedIn</li>
+                        <li>Estar publicando conteúdo consistente (2-3x/semana)</li>
+                        <li>Ter falado em pelo menos 3 eventos sobre IA</li>
+                        <li>Receita ativa de algum produto ou servico baseado em IA</li>
+                        <li>Definir plano para o próximo ano (IA avancada / estratégia global)</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Plano de Conteudo Tab -->
+            <div id="conteudo" class="tab-content">
+                <h2 class="section-title">📝 Plano de Conteúdo - Tornando-se Autoridade Pública em IA</h2>
+                
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <h3>📸 Instagram / TikTok (2-3x/semana)</h3>
+                        <ul style="list-style:disc; padding-left:20px; color:#6c757d;">
+                            <li>"Esta IA fez X em 10 segundos" (demo rápido)</li>
+                            <li>Desmistificar técnologia (ex: O que é RAG?)</li>
+                            <li>Cases de uso reais nas empresas brasileiras</li>
+                            <li>"5 ferramentas de IA que todo empreendedor precisa"</li>
+                            <li>Comparações: ChatGPT vs Gemini vs Claude</li>
+                            <li>"Teste sua empresa com IA em 15 minutos"</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>💼 LinkedIn (4-5x/semana)</h3>
+                        <ul style="list-style:disc; padding-left:20px; color:#6c757d;">
+                            <li>Insights sobre notícias de IA (manhã)</li>
+                            <li>Artigos longos sobre IA + negócios</li>
+                            <li>Share de experiencias pessoais com IA</li>
+                            <li>Opinião sobre tendencias globais (EUA/China)</li>
+                            <li>Dicas de ferramentas e automações</li>
+                            <li>Case studies de projetos próprios</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>💡 Pilares de Conteúdo (3 Categorias Fixas)</h3>
+                        <ul style="list-style:disc; padding-left:20px; color:#6c757d;">
+                            <li><strong>Educacional:</strong> Fundamentos, ferramentas e conceitos</li>
+                            <li><strong>Business:</strong> IA aplicada a empreendedorismo e produtividade</li>
+                            <li><strong>Futuro:</strong> Tendências globais, EUA vs China, mercado</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>📊 Métricas de Conteúdo</h3>
+                        <ul style="list-style:disc; padding-left:20px; color:#6c757d;">
+                            <li>Meta: 10K seguidores em 12 meses</li>
+                            <li>Post engagement rate: >5%</li>
+                            <li>1 artigo longo/semana (LinkedIn/Medium)</li>
+                            <li>Newsletter mensal para 500 inscritos</li>
+                            <li>1 palestra por trimestre</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card" style="margin-top:20px;">
+                    <h3>🗓️ Calendário de Conteúdo Semanal</h3>
+                    <table style="width:100%; border-collapse:collapse; margin-top:15px;">
+                        <tr style="background:#667eea; color:white;">
+                            <th style="padding:10px; text-align:left;">Dia</th>
+                            <th style="padding:10px; text-align:left;">Plataforma</th>
+                            <th style="padding:10px; text-align:left;">Tipo de Conteúdo</th>
+                        </tr>
+                        <tr style="background:#f8f9fa;">
+                            <td style="padding:10px;">Segunda</td>
+                            <td style="padding:10px;">LinkedIn</td>
+                            <td style="padding:10px;">Notícia + opinião sobre IA</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px;">Terça</td>
+                            <td style="padding:10px;">TikTok/Reels</td>
+                            <td style="padding:10px;">Demo rápido de ferramenta</td>
+                        </tr>
+                        <tr style="background:#f8f9fa;">
+                            <td style="padding:10px;">Quarta</td>
+                            <td style="padding:10px;">LinkedIn</td>
+                            <td style="padding:10px;">Artigo longo ou carrossel</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px;">Quinta</td>
+                            <td style="padding:10px;">Instagram/TikTok</td>
+                            <td style="padding:10px;">Case study ou tutorial</td>
+                        </tr>
+                        <tr style="background:#f8f9fa;">
+                            <td style="padding:10px;">Sexta</td>
+                            <td style="padding:10px;">LinkedIn</td>
+                            <td style="padding:10px;">Reflexão da semana + dica</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- Acompanhamento Tab -->
+            <div id="acompanhamento" class="tab-content">
+                <h2 class="section-title">📈 Painel de Execução Pessoal</h2>
+                
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <h3>💡 Atualizar Progresso</h3>
+                        <div class="input-group">
+                            <label>Cursos Concluídos (de 12)</label>
+                            <input type="number" id="input-cursos" min="0" max="12" placeholder="0" onchange="updateMetric('cursos', this.value, 12)">
+                        </div>
+                        <div class="input-group">
+                            <label>Horas de Estudo Acumuladas</label>
+                            <input type="number" id="input-horas" min="0" max="500" placeholder="0" onchange="updateMetric('horas', this.value, 500)">
+                        </div>
+                        <div class="input-group">
+                            <label>Projetos Práticos Concluídos</label>
+                            <input type="number" id="input-projetos" min="0" max="20" placeholder="0" onchange="updateMetric('projetos', this.value, 20)">
+                        </div>
+                        <div class="input-group">
+                            <label>Conexões Globais de IA (LinkedIn)</label>
+                            <input type="number" id="input-network" min="0" max="100" placeholder="0" onchange="updateMetric('network', this.value, 100)">
+                        </div>
+                        <button class="btn" onclick="saveProgress()">Salvar Progresso</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>🗓️ Log de Atividades</h3>
+                        <div class="input-group">
+                            <label>Nova Atividade</label>
+                            <input type="text" id="nova-atividade" placeholder="Ex: Concluí Curso X...">
+                        </div>
+                        <div class="input-group">
+                            <label>Data</label>
+                            <input type="date" id="data-atividade">
+                        </div>
+                        <div class="input-group">
+                            <label>Categoria</label>
+                            <select id="categoria-atividade">
+                                <option>Curso</option>
+                                <option>Projeto</option>
+                                <option>Networking</option>
+                                <option>Conteúdo Publicado</option>
+                                <option>Evento/Conferência</option>
+                            </select>
+                        </div>
+                        <button class="btn" onclick="addActivity()">Adicionar Atividade</button>
+                        <div id="activity-log" style="margin-top:15px;"></div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>🎯 Reflexão Semanal</h3>
+                        <div class="input-group">
+                            <label>O que aprendi essa semana?</label>
+                            <textarea id="aprendizagem" rows="3" placeholder="Escreva aqui..."></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label>Qual ação tomei?</label>
+                            <textarea id="acao" rows="3" placeholder="Escreva aqui..."></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label>O que melhorar?</label>
+                            <textarea id="melhoria" rows="3" placeholder="Escreva aqui..."></textarea>
+                        </div>
+                        <button class="btn" onclick="saveReflection()">Salvar Reflexão</button>
+                    </div>
+                </div>
+                
+                <div class="card" style="margin-top:20px;">
+                    <h3>🎯 Competências Essenciais de IA para Empreendedores</h3>
+                    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:15px; margin-top:15px;">
+                        <div>
+                            <p><strong>Prompt Engineering</strong></p>
+                            <div class="progress-bar"><div class="progress-fill" id="skill-prompt" style="width:0%"></div></div>
+                            <input type="range" min="0" max="100" value="0" oninput="updateSkill('prompt', this.value)" style="width:100%; margin-top:5px;">
+                        </div>
+                        <div>
+                            <p><strong>Agentes de IA</strong></p>
+                            <div class="progress-bar"><div class="progress-fill" id="skill-agentes" style="width:0%"></div></div>
+                            <input type="range" min="0" max="100" value="0" oninput="updateSkill('agentes', this.value)" style="width:100%; margin-top:5px;">
+                        </div>
+                        <div>
+                            <p><strong>IA para Negócios</strong></p>
+                            <div class="progress-bar"><div class="progress-fill" id="skill-business" style="width:0%"></div></div>
+                            <input type="range" min="0" max="100" value="0" oninput="updateSkill('business', this.value)" style="width:100%; margin-top:5px;">
+                        </div>
+                        <div>
+                            <p><strong>Estratégia de IA</strong></p>
+                            <div class="progress-bar"><div class="progress-fill" id="skill-estrategia" style="width:0%"></div></div>
+                            <input type="range" min="0" max="100" value="0" oninput="updateSkill('estrategia', this.value)" style="width:100%; margin-top:5px;">
+                        </div>
+                        <div>
+                            <p><strong>Automação com IA</strong></p>
+                            <div class="progress-bar"><div class="progress-fill" id="skill-automacao" style="width:0%"></div></div>
+                            <input type="range" min="0" max="100" value="0" oninput="updateSkill('automacao', this.value)" style="width:100%; margin-top:5px;">
+                        </div>
+                        <div>
+                            <p><strong>Liderança com IA</strong></p>
+                            <div class="progress-bar"><div class="progress-fill" id="skill-lideranca" style="width:0%"></div></div>
+                            <input type="range" min="0" max="100" value="0" oninput="updateSkill('lideranca', this.value)" style="width:100%; margin-top:5px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function openTab(event, tabId) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+        
+        function updateMetric(type, value, max) {
+            const el = document.getElementById(type === 'horas' ? 'horas-estudo' : type === 'cursos' ? 'cursos-concluidos' : type);
+            const progress = document.getElementById('progress-' + (type === 'cursos' ? 'cursos' : type === 'horas' ? 'horas' : type === 'projetos' ? 'projetos' : 'network'));
+            if (el) el.textContent = value;
+            if (progress) progress.style.width = ((value / max) * 100) + '%';
+            localStorage.setItem('metric-' + type, value);
+        }
+        
+        function saveProgress() {
+            const metrics = ['cursos', 'horas', 'projetos', 'network'];
+            metrics.forEach(m => {
+                const input = document.getElementById('input-' + m);
+                if (input && input.value) {
+                    const maxMap = { cursos: 12, horas: 500, projetos: 20, network: 100 };
+                    updateMetric(m, input.value, maxMap[m]);
+                }
+            });
+            alert('Progresso salvo! Mantendo o foco! 🚀');
+        }
+        
+        function addActivity() {
+            const atividade = document.getElementById('nova-atividade').value;
+            const data = document.getElementById('data-atividade').value;
+            const categoria = document.getElementById('categoria-atividade').value;
+            if (!atividade) return alert('Digite uma atividade!');
+            const log = document.getElementById('activity-log');
+            const item = document.createElement('div');
+            item.style.cssText = 'background:#f8f9fa; padding:10px; margin:5px 0; border-radius:5px; border-left:3px solid #667eea;';
+            item.innerHTML = '<strong>' + categoria + '</strong> - ' + data + '<br><small>' + atividade + '</small>';
+            log.insertBefore(item, log.firstChild);
+            document.getElementById('nova-atividade').value = '';
+            saveActivityToStorage(atividade, data, categoria);
+        }
+        
+        function saveActivityToStorage(atividade, data, categoria) {
+            const activities = JSON.parse(localStorage.getItem('activities') || '[]');
+            activities.unshift({ atividade, data, categoria });
+            localStorage.setItem('activities', JSON.stringify(activities.slice(0, 50)));
+        }
+        
+        function saveReflection() {
+            const reflection = {
+                semana: new Date().toLocaleDateString('pt-BR'),
+                aprendizagem: document.getElementById('aprendizagem').value,
+                acao: document.getElementById('acao').value,
+                melhoria: document.getElementById('melhoria').value
+            };
+            const reflections = JSON.parse(localStorage.getItem('reflections') || '[]');
+            reflections.unshift(reflection);
+            localStorage.setItem('reflections', JSON.stringify(reflections.slice(0, 12)));
+            alert('Reflexão salva! Crescimento contínuo! 💪');
+        }
+        
+        function updateSkill(skill, value) {
+            const el = document.getElementById('skill-' + skill);
+            if (el) el.style.width = value + '%';
+            localStorage.setItem('skill-' + skill, value);
+        }
+        
+        // Load saved data on startup
+        window.onload = function() {
+            const maxMap = { cursos: 12, horas: 500, projetos: 20, network: 100 };
+            ['cursos', 'horas', 'projetos', 'network'].forEach(m => {
+                const saved = localStorage.getItem('metric-' + m);
+                if (saved) {
+                    const input = document.getElementById('input-' + m);
+                    if (input) input.value = saved;
+                    updateMetric(m, saved, maxMap[m]);
+                }
+            });
+            
+            ['prompt', 'agentes', 'business', 'estrategia', 'automacao', 'lideranca'].forEach(s => {
+                const saved = localStorage.getItem('skill-' + s);
+                if (saved) updateSkill(s, saved);
+            });
+            
+            const activities = JSON.parse(localStorage.getItem('activities') || '[]');
+            const log = document.getElementById('activity-log');
+            activities.slice(0, 10).forEach(a => {
+                const item = document.createElement('div');
+                item.style.cssText = 'background:#f8f9fa; padding:10px; margin:5px 0; border-radius:5px; border-left:3px solid #667eea;';
+                item.innerHTML = '<strong>' + a.categoria + '</strong> - ' + a.data + '<br><small>' + a.atividade + '</small>';
+                log.appendChild(item);
+            });
+        };
+    </script>
+</body>
+</html>
